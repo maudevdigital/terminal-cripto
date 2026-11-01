@@ -1,0 +1,49 @@
+/* Freno, simulacion, horario del mercado y la cabina de riesgo de la cuenta. */
+
+/* -------------------------------------------------------------------- freno */
+.freno { @apply flex flex-col gap-[3px] text-[12px]; }
+.freno.bloquea { @apply border-[rgba(var(--rgb-baja),.6)]; }
+.freno.bloquea b { @apply text-baja; }
+.freno.avisa { @apply border-[rgba(var(--rgb-aviso),.55)]; }
+.freno.avisa b { @apply text-aviso; }
+.freno-fila { @apply flex flex-wrap gap-1.5 px-0.5 text-[11.5px]; }
+
+/* ----------------------------------------------------------- simulacion */
+.simulacion { @apply flex flex-col gap-2.5 overflow-y-auto p-3; }
+
+/* ------------------------------------------------ horario del mercado (MT5) */
+.horario-mercado { @apply inline-flex items-center gap-1.5 text-[11.5px] text-tenue; }
+.horario-mercado i { @apply size-[7px] flex-none rounded-full bg-sube-fuerte; }
+.horario-mercado.cierra { @apply text-aviso; }
+.horario-mercado.cierra i { @apply bg-aviso-fuerte; }
+.horario-mercado.cerrado { @apply text-baja; }
+.horario-mercado.cerrado i { @apply bg-baja-fuerte; }
+.horario-panel { @apply flex flex-col gap-1; }
+.horario-panel.cierra { @apply border-[rgba(var(--rgb-aviso),.5)]; }
+.horario-panel.cerrado { @apply border-[rgba(var(--rgb-baja),.5)]; }
+.aviso-cierre { @apply text-[11.5px] text-aviso; }
+
+/* ------------------------------------------------------- cabina de riesgo */
+.cabina-riesgo { @apply inline-flex flex-wrap items-center gap-3 text-[11.5px]; }
+/* Operar: la cuenta arriba, en cuatro cifras, con los limites de la firma debajo. */
+.cuenta-cifras { @apply mt-1 mb-0.5 grid grid-cols-2 gap-x-3 gap-y-1.5; }
+.cuenta-cifras span { @apply flex flex-col gap-px; }
+.cuenta-cifras b { @apply font-mono text-[13px] font-semibold; }
+.dato.cuenta .cabina-riesgo { @apply gap-y-1.5 border-t border-borde pt-1.5; }
+.op-titulo { @apply mx-0.5 mt-2 mb-0 block text-[11px] tracking-[.06em] text-tenue uppercase; }
+.op-otros { @apply flex flex-wrap items-center gap-1; }
+.op-otros .chip { @apply px-2 py-0.5 text-[11px]; }
+.riesgo-limite { @apply inline-flex items-center gap-1.5 tabular-nums; }
+.riesgo-limite b { @apply font-mono font-semibold; }
+/* El medidor: la pista es un paso mas claro del mismo color que el relleno. */
+.medidor { @apply relative h-1.5 w-16 overflow-hidden rounded-[3px] bg-[rgba(var(--rgb-tinta),.14)]; }
+.medidor i { @apply absolute inset-y-0 left-0 rounded-[3px] bg-oscuro; }
+.riesgo-limite.cuidado .medidor { @apply bg-[rgba(var(--rgb-aviso),.22)]; }
+.riesgo-limite.cuidado .medidor i { @apply bg-aviso-fuerte; }
+.riesgo-limite.cuidado b { @apply text-aviso; }
+.riesgo-limite.limite .medidor { @apply bg-[rgba(var(--rgb-baja),.22)]; }
+.riesgo-limite.limite .medidor i { @apply bg-baja-fuerte; }
+.riesgo-limite.limite b { @apply text-baja; }
+.riesgo-disp b { @apply font-mono font-semibold; }
+.riesgo-aviso { @apply inline-flex items-center gap-1 text-aviso; }
+.op-cuenta { @apply col-span-full; }

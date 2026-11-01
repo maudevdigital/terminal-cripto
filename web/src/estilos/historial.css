@@ -1,0 +1,89 @@
+/* El historial de la cuenta: tapa el grafico y el panel. Tarjetas de cifras, series,
+   el calendario de resultados, la tabla de operaciones y los cierres. (El calendario
+   economico usa la misma barra y el mismo cuerpo.) */
+.historial { @apply absolute inset-0 z-30 flex min-h-0 flex-col bg-fondo text-texto; }
+.historial-barra {
+  @apply flex flex-none flex-wrap items-center gap-3.5 border-b border-borde px-4 py-2.5 movil:gap-2 movil:px-2.5 movil:py-2;
+}
+.historial-barra h2 { @apply m-0 text-[15px] font-[650] movil:w-full movil:text-[14px]; }
+.historial-sheets { @apply relative ml-auto inline-flex items-center gap-2 text-[12px] text-tenue movil:ml-0 movil:flex-wrap; }
+.historial-sheets.error { @apply text-baja; }
+.historial-sheets a { @apply text-acento-texto; }
+.historial-sheets button, .historial-mas {
+  @apply cursor-pointer rounded-md border border-borde bg-panel-2 px-2.5 py-1 text-[12px] text-texto;
+}
+.historial-sheets button:disabled { @apply cursor-default opacity-50; }
+.historial-sheets + .historial-sheets { @apply ml-0; }
+.historial-cerrar {
+  @apply inline-flex h-7 w-[30px] cursor-pointer items-center justify-center rounded-[7px] border border-borde bg-transparent text-tenue
+         hover:bg-panel-2 hover:text-texto movil:hidden;
+}
+.historial-vacio { @apply flex flex-col gap-1.5 px-4 py-10 text-center text-[13px]; }
+.historial-cuerpo {
+  @apply flex flex-auto flex-col gap-3.5 overflow-y-auto px-4 pt-3.5 pb-6 transition-opacity duration-200
+         movil:gap-2.5 movil:px-2 movil:pt-2.5 movil:pb-4;
+}
+.historial-cuerpo.cargando { @apply opacity-85; }
+/* Las tarjetas no se achican: el cuerpo se desplaza. */
+.historial-cuerpo > * { @apply shrink-0; }
+.historial-riesgo { @apply flex flex-wrap items-center gap-3.5 text-[12px]; }
+
+.historial-tiles { @apply grid grid-cols-4 gap-2.5 max-[1280px]:grid-cols-2 movil:gap-2; }
+.tile { @apply flex min-w-0 flex-col gap-[3px] rounded-[9px] border border-borde bg-panel px-[13px] py-[11px] movil:px-2.5 movil:py-[9px]; }
+.tile-titulo { @apply text-[11.5px] text-tenue; }
+.tile-valor { @apply text-[20px]/[1.2] font-[650] movil:text-[17px]; }
+.tile.heroe .tile-valor { @apply text-[26px]; }
+.tile.heroe { @apply movil:col-span-full; }
+.tile-ayuda { @apply text-[11px] text-apagado; }
+.tile .pos { @apply text-sube; }
+.tile .neg { @apply text-baja; }
+
+.historial-fila { @apply grid gap-3.5; }
+.historial-fila.dos { @apply grid-cols-2; }
+.historial-fila.tres { @apply grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)_minmax(0,1fr)]; }
+.historial-fila.dos, .historial-fila.tres { @apply max-[1280px]:grid-cols-1 movil:grid-cols-1; }
+.historial-tarjeta {
+  @apply flex min-w-0 flex-col gap-2 rounded-[10px] border border-borde bg-panel px-3.5 py-3 movil:overflow-x-auto movil:p-2.5;
+}
+.historial-titulo { @apply flex flex-wrap items-baseline gap-2.5 text-[13px]; }
+.historial-titulo .tenue { @apply text-[11.5px]; }
+
+.serie { @apply flex flex-col gap-1; }
+.serie-lectura { @apply flex min-h-[18px] items-baseline gap-2 text-[13px]; }
+.serie-lectura b { @apply font-[650]; }
+.serie-grafico { @apply h-[230px] w-full movil:h-[200px]; }
+
+/* El calendario de resultados (un cuadro por dia). */
+.calendario { @apply grid grid-cols-7 gap-[3px]; }
+.calendario-cab { @apply pb-0.5 text-center text-[10.5px] text-apagado; }
+.calendario-dia { @apply relative flex h-[30px] items-center justify-center rounded-sm bg-panel-2 text-[10.5px] text-texto; }
+.calendario-dia small { @apply absolute top-0.5 left-1 text-[9px] text-apagado; }
+.calendario-dia.con small { @apply text-[rgba(var(--rgb-tinta),.6)]; }
+.calendario-dia b { @apply mt-1.5 font-semibold tabular-nums; }
+
+.historial-tabla-caja { @apply overflow-x-auto; }
+.historial-tabla { @apply w-full border-collapse text-[12px] tabular-nums; }
+.historial-tabla th { @apply border-b border-borde px-2 py-1.5 text-left text-[11px] font-semibold whitespace-nowrap text-tenue; }
+.historial-tabla td { @apply border-b border-linea px-2 py-1.5 whitespace-nowrap; }
+.historial-tabla tr:hover td { @apply bg-[rgba(var(--rgb-tinta),.05)]; }
+.historial-tabla .num { @apply text-right; }
+.historial-tabla td.pos b { @apply font-semibold text-sube; }
+.historial-tabla td.neg b { @apply font-semibold text-baja; }
+.historial-tabla .lado-compra { @apply text-sube; }
+.historial-tabla .lado-venta { @apply text-baja; }
+.historial-tabla.compacta td, .historial-tabla.compacta th { @apply px-1.5 py-[5px]; }
+.historial-mas { @apply self-start; }
+.barra-centro { @apply relative mr-2 inline-block h-2 w-[70px] align-middle; }
+.barra-centro::before { @apply absolute -inset-y-0.5 left-1/2 w-px bg-borde content-['']; }
+.barra-centro i { @apply absolute inset-y-0 rounded-xs; }
+.barra-centro i.pos { @apply bg-sube-fuerte; }
+.barra-centro i.neg { @apply bg-baja-fuerte; }
+
+.distribucion { @apply h-auto w-full; }
+.distribucion-valor { @apply fill-texto text-[10.5px] font-semibold; }
+.distribucion-eje { @apply fill-apagado text-[9.5px]; }
+.cierres { @apply mt-1 flex flex-col gap-[5px] text-[12px]; }
+.cierre { @apply grid grid-cols-[90px_1fr_28px] items-center gap-2; }
+.cierre b { @apply text-right tabular-nums; }
+.cierre-barra { @apply h-1.5 overflow-hidden rounded-[3px] bg-[rgba(var(--rgb-tinta),.12)]; }
+.cierre-barra i { @apply block h-full rounded-[3px] bg-acento; }

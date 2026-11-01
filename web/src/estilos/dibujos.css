@@ -1,0 +1,41 @@
+/* Los dibujos: la capa que toma el puntero, la barra de herramientas de la izquierda
+   (como en TradingView) y la barra de estilo del dibujo elegido. */
+.capa-dibujo { @apply pointer-events-none absolute inset-0 z-3; }
+.capa-dibujo.activa { @apply pointer-events-auto cursor-crosshair; }
+/* Con el cursor, la capa toma el puntero solo sobre un dibujo (para tomarlo). */
+.capa-dibujo.agarra { @apply pointer-events-auto; }
+.capa-dibujo.activa, .capa-dibujo.agarra { @apply movil:touch-none; }
+
+/* Barra de estilo del dibujo seleccionado, arriba al centro. */
+.estilo-dibujo {
+  @apply absolute top-10 left-1/2 z-6 flex -translate-x-1/2 items-center gap-1 rounded-[9px] border border-borde bg-vidrio px-2 py-1 text-[11.5px] shadow-desk
+         movil:top-[34px] movil:max-w-[calc(100vw-16px)] movil:flex-wrap movil:justify-center;
+}
+.estilo-dibujo > span.tenue { @apply mr-1 movil:hidden; }
+.estilo-dibujo button {
+  @apply inline-flex h-[26px] min-w-[26px] cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent text-tenue
+         hover:bg-panel-2 hover:text-texto;
+}
+.estilo-dibujo button.muestra { @apply size-[18px] min-w-[18px] rounded-full border-[rgba(var(--rgb-tinta),.25)]; }
+.estilo-dibujo button.muestra.activo { @apply shadow-[0_0_0_2px_var(--fondo),0_0_0_3.5px_var(--texto)]; }
+.estilo-dibujo button.grosor i { @apply block w-4 rounded-xs bg-current; }
+.estilo-dibujo button.grosor.activo { @apply border-borde bg-panel-2 text-texto; }
+.estilo-dibujo button.activo:not(.muestra):not(.grosor) { @apply bg-oscuro text-sobre-oscuro; }
+.estilo-dibujo button:disabled, .barra-dibujo button:disabled { @apply cursor-default bg-transparent opacity-35; }
+.estilo-sep { @apply mx-[3px] h-[18px] w-px bg-borde; }
+
+/* Barra vertical a la izquierda del grafico. En el celular, abajo y plegada detras
+   de un boton (el lapiz), mas chica y tactil. */
+.barra-dibujo {
+  @apply absolute top-1/2 left-2 z-5 flex -translate-y-1/2 flex-col gap-0.5 rounded-[9px] border border-borde bg-vidrio p-1 shadow-desk
+         movil:top-auto movil:bottom-2 movil:left-1 movil:translate-y-0 movil:p-[3px];
+}
+.barra-dibujo button {
+  @apply inline-flex size-[30px] cursor-pointer items-center justify-center rounded-md border-0 bg-transparent text-tenue
+         hover:bg-panel-2 hover:text-texto movil:size-[34px];
+}
+.barra-dibujo button.activo { @apply bg-oscuro text-sobre-oscuro; }
+.barra-dibujo button.iman.activo { @apply bg-acento-suave text-acento-texto; }
+.barra-dibujo-sep { @apply mx-1 my-[3px] h-px bg-borde; }
+.barra-dibujo .alternar { @apply hidden movil:inline-flex; }
+.barra-dibujo:not(.abierta) > :not(.alternar) { @apply movil:hidden; }

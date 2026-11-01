@@ -1,0 +1,135 @@
+/* El panel de la derecha y Operar, con Tailwind (@apply): las clases de siempre en
+   el JSX, armadas con las utilidades y los tokens de la paleta. */
+
+/* ------------------------------------------------------- panel de la derecha */
+.lateral {
+  @apply flex min-h-0 flex-[0_0_350px] flex-col border-l border-borde bg-panel max-[1100px]:basis-[310px]
+         movil:w-full movil:flex-auto movil:border-l-0;
+  animation: entra-panel .16s ease-out;
+}
+@keyframes entra-panel { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: none; } }
+.lateral > .operar { @apply min-h-0 flex-auto overflow-y-auto border-l-0 movil:pb-3; }
+
+/* ------------------------------------------------------------------ operar */
+.operar { @apply flex flex-col gap-2.5 px-3.5 pt-3 pb-3.5; }
+.preparacion ol { @apply m-0 mt-0.5 flex list-none flex-col gap-1.5 p-0; }
+.preparacion li { @apply flex flex-col gap-px text-[12px]; }
+.preparacion li b { @apply font-semibold text-aviso; }
+.preparacion li.hecho b { @apply text-sube; }
+
+.cotizacion { @apply grid grid-cols-2 gap-1.5; }
+.cotizacion .lado {
+  @apply flex cursor-pointer flex-col items-center gap-px rounded-[9px] border border-borde bg-panel-2 px-1.5 py-[9px] opacity-70
+         movil:px-2 movil:py-3;
+}
+.cotizacion .lado small { @apply text-[10.5px] font-bold tracking-[.08em]; }
+.cotizacion .lado b { @apply font-mono text-[16px] font-semibold; }
+.cotizacion .lado.venta { @apply text-baja; }
+.cotizacion .lado.compra { @apply text-sube; }
+.cotizacion .lado.activo { @apply opacity-100; }
+.cotizacion .lado.venta.activo { @apply border-[rgba(var(--rgb-baja),.75)] bg-[rgba(var(--rgb-baja),.12)]; }
+.cotizacion .lado.compra.activo { @apply border-[rgba(var(--rgb-sube),.75)] bg-[rgba(var(--rgb-sube),.12)]; }
+.op-simbolo { @apply text-[11.5px]; }
+
+.spread { @apply flex flex-col gap-[3px] px-0.5 text-[12px]; }
+.spread .fila { @apply flex justify-between gap-2; }
+.spread .fila b { @apply font-mono font-medium; }
+.spread .fila em { @apply font-sans text-tenue not-italic; }
+.spread-lado { @apply text-[11.5px] font-semibold text-tenue; }
+.spread-lado.compras, .spread-lado.ventas { @apply text-aviso; }
+
+.op-form { @apply gap-[9px]; }
+.op-form .segmento { @apply self-start; }
+.op-fila { @apply grid grid-cols-2 gap-2; }
+.op-campo { @apply flex flex-col gap-[3px] text-[11.5px] text-tenue; }
+.operar input {
+  @apply w-full rounded-[7px] border border-borde bg-fondo px-2 py-1.5 font-mono text-[13px] text-texto
+         movil:px-2.5 movil:py-[9px] movil:text-[16px];
+}
+.operar input:focus { @apply border-acento shadow-[0_0_0_2px_var(--acento-suave)] outline-none; }
+.operar input:disabled { @apply opacity-70; }
+.op-nivel { @apply grid grid-cols-[auto_auto_1fr] grid-rows-[auto_auto] items-center gap-x-2 gap-y-1; }
+.op-nivel-titulo { @apply text-[12px] font-[650]; }
+.op-nivel input { @apply col-start-3; }
+.op-nivel-valor { @apply col-span-full font-mono text-[11.5px]; }
+.op-resumen { @apply grid grid-cols-2 gap-x-2.5 gap-y-[3px] text-[11.5px] text-tenue; }
+.op-resumen b { @apply font-mono font-medium text-texto; }
+.op-error { @apply text-[12px] text-baja; }
+
+.boton-orden { @apply w-full cursor-pointer rounded-lg border px-3 py-[9px] font-bold tracking-[.02em] movil:py-[13px] movil:text-[14px]; }
+.boton-orden.compra { @apply border-sube-fuerte bg-sube-fuerte text-white; }
+.boton-orden.venta { @apply border-baja-fuerte bg-baja-fuerte text-white; }
+.boton-orden.confirmar { @apply border-oscuro bg-oscuro text-sobre-oscuro; }
+.boton-orden:not(:disabled):hover { @apply shadow-[0_4px_12px_rgba(var(--rgb-sombra),.4)] brightness-[1.07]; }
+.boton-orden:disabled { @apply cursor-default opacity-40; }
+
+.op-confirmar { @apply flex flex-col gap-1 rounded-lg border border-borde bg-panel-2 p-2.5 text-[12px]; }
+.op-confirmar.compra { @apply border-[rgba(var(--rgb-sube),.55)]; }
+.op-confirmar.venta { @apply border-[rgba(var(--rgb-baja),.55)]; }
+.op-acciones { @apply mt-1 flex gap-1.5; }
+.op-acciones button, .op-editar button {
+  @apply cursor-pointer rounded-md border border-borde bg-panel-2 px-2.5 py-[5px] text-[12px] text-texto
+         movil:px-3 movil:py-2 movil:text-[13px];
+}
+.op-acciones .boton-orden { @apply flex-1; }
+.op-acciones button.peligro, .op-editar button.peligro { @apply border-[rgba(var(--rgb-baja),.6)] text-baja; }
+.op-acciones button.tenue, .op-editar button.tenue { @apply text-tenue; }
+.op-resultado { @apply text-[12px] font-semibold; }
+
+.op-lista { @apply m-0 mt-0.5 flex list-none flex-col gap-1.5 p-0; }
+.op-posicion { @apply flex flex-col gap-0.5 rounded-[7px] bg-panel-2 px-[9px] py-[7px] text-[12px]; }
+.op-posicion.compra { @apply shadow-[inset_2px_0_0_var(--sube-fuerte)]; }
+.op-posicion.venta { @apply shadow-[inset_2px_0_0_var(--baja-fuerte)]; }
+.op-posicion .fila { @apply flex justify-between gap-x-2 gap-y-0.5; }
+.op-posicion .fila.tenue { @apply flex-wrap; }
+.op-posicion .fila.tenue > span { @apply whitespace-nowrap; }
+.op-posicion .fila b { @apply font-mono font-medium; }
+.op-posicion .fila b.texto { @apply font-sans font-semibold; }
+
+.op-modificar { @apply mt-1.5 flex flex-col gap-[5px] text-[11.5px]; }
+.op-mod-fila { @apply grid grid-cols-[44px_108px_1fr] items-center gap-2; }
+.op-mod-fila > span:first-child { @apply font-[650] text-texto; }
+.op-mod-fila > span:last-child { @apply font-mono text-[11px]; }
+.op-modificar input { @apply px-[7px] py-1; }
+.op-atajos { @apply flex flex-wrap gap-1; }
+.op-atajos button {
+  @apply cursor-pointer rounded-md border border-borde bg-transparent px-2 py-[3px] text-[11px] text-tenue hover:bg-panel-3 hover:text-texto;
+}
+.op-ayuda { @apply text-[11px]; }
+.op-editar { @apply mt-1 flex flex-wrap items-center gap-1.5 text-[11.5px] text-tenue; }
+.op-editar label { @apply flex items-center gap-1; }
+.op-editar input { @apply w-[92px] movil:w-[110px]; }
+
+/* --------------------------------------------- Operar
+   Secciones planas a todo el ancho, separadas por una linea (no tarjetas con
+   borde), titulos chicos en mayuscula espaciada, cifras en mono y los botones de
+   compra y venta rellenos de su color. */
+.operar { @apply gap-0 px-3.5 pt-0 pb-3.5; }
+.operar > .dato, .operar > .freno-fila {
+  @apply -mx-3.5 rounded-none border-0 border-b border-borde bg-transparent px-3.5 py-3;
+}
+.operar > .dato small, .operar .op-titulo { @apply text-[10.5px] font-semibold tracking-[.08em] text-apagado; }
+.operar .cuenta-cifras b { @apply text-[15px]; }
+.operar > .dato.freno.bloquea { @apply bg-[rgba(var(--rgb-baja),.08)] shadow-[inset_2px_0_0_var(--baja-fuerte)]; }
+.operar > .dato.freno.avisa { @apply bg-[rgba(var(--rgb-aviso),.07)] shadow-[inset_2px_0_0_var(--aviso-fuerte)]; }
+.operar > .dato.horario-panel.cierra { @apply bg-[rgba(var(--rgb-aviso),.07)]; }
+.operar > .dato.horario-panel.cerrado { @apply bg-[rgba(var(--rgb-baja),.07)]; }
+.operar .op-titulo { @apply mx-0 mt-0 flex items-center justify-between pt-3.5 pb-2; }
+
+/* Las posiciones: filas planas con su color al costado. */
+.operar .op-lista { @apply mt-1 gap-0; }
+.operar .op-posicion { @apply rounded-none border-b border-linea bg-transparent py-2 pr-0 pl-2.5 last:border-b-0; }
+
+/* Vender y comprar: el elegido, relleno de su color. */
+.cotizacion .lado { @apply rounded-lg border-transparent opacity-100 transition-colors; }
+.cotizacion .lado b { @apply text-[17px]; }
+.cotizacion .lado.venta:not(.activo) { @apply bg-[rgba(var(--rgb-baja),.08)] hover:bg-[rgba(var(--rgb-baja),.14)]; }
+.cotizacion .lado.compra:not(.activo) { @apply bg-[rgba(var(--rgb-sube),.08)] hover:bg-[rgba(var(--rgb-sube),.14)]; }
+.cotizacion .lado.venta.activo { @apply border-baja-fuerte bg-baja-fuerte text-white; }
+.cotizacion .lado.compra.activo { @apply border-sube-fuerte bg-sube-fuerte text-white; }
+.operar > .cotizacion { @apply pt-1; }
+.operar > .op-simbolo { @apply py-2 text-[11px]; }
+
+/* Los campos: un gris mas claro, sin el borde marcado. */
+.operar input { @apply rounded-md border-linea bg-panel-2 focus:border-tenue focus:shadow-none; }
+.operar > .pie { @apply mt-3; }

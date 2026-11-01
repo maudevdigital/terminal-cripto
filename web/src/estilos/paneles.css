@@ -1,0 +1,12 @@
+/* Las tarjetas de los paneles (Operar, Backtest): un "dato" con su titulo
+   chico y sus filas de rotulo y cifra. */
+.dato { @apply flex flex-col gap-1 rounded-lg border border-borde bg-panel px-[11px] py-2.5; }
+.dato small { @apply text-[11px] tracking-[.06em] text-tenue uppercase; }
+.dato .fila { @apply flex items-baseline justify-between gap-2.5; }
+.dato .fila b { @apply text-right font-mono font-medium whitespace-nowrap tabular-nums; }
+.dato .fila b.texto { @apply font-sans font-semibold; }
+.dato .fila em { @apply font-sans font-medium not-italic; }
+.dato .fila em:not([class]) { @apply text-tenue; }
+
+.aviso-mt5 { @apply text-[11.5px] text-aviso; }
+.pie { @apply mx-0.5 mt-auto mb-0 text-[11px]; }

@@ -1,0 +1,98 @@
+/* El cuerpo y el grafico: la barra de arriba, los paneles del precio y del squeeze,
+   las capas de canvas, las leyendas y los avisos sobre las velas. */
+
+.cuerpo { @apply relative flex min-h-0 flex-auto movil:flex-col; }
+
+/* ----------------------------------------------------------------- grafico */
+.grafico { @apply flex min-w-0 flex-auto flex-col; }
+.grafico-barra {
+  @apply flex flex-none flex-wrap items-center justify-between gap-3 border-b border-borde px-2.5 py-[5px]
+         movil:flex-col movil:flex-nowrap movil:items-stretch movil:gap-1.5 movil:px-2 movil:py-1.5;
+}
+.segmento { @apply flex rounded-lg border border-linea bg-panel p-0.5; }
+.segmento button {
+  @apply min-w-[30px] cursor-pointer rounded-md border-0 bg-transparent px-[11px] py-[5px] text-[12.5px] font-[550] text-tenue hover:text-texto
+         movil:min-h-8 movil:px-3;
+}
+.segmento button.activo { @apply bg-panel-3 text-texto shadow-[inset_0_0_0_1px_var(--borde)]; }
+.segmento.chico button { @apply px-[9px] py-[3px] text-[11.5px] movil:min-h-[30px]; }
+.temporalidades { @apply flex flex-wrap items-center gap-1.5; }
+
+.capas { @apply flex flex-wrap items-center gap-1.5; }
+/* En el celular, las dos barras se deslizan de costado en vez de partirse. */
+.temporalidades, .capas { @apply movil:flex-nowrap movil:overflow-x-auto movil:[scrollbar-width:none]; }
+.temporalidades::-webkit-scrollbar, .capas::-webkit-scrollbar { @apply movil:hidden; }
+.temporalidades .segmento, .capas > * { @apply movil:flex-none; }
+
+.chip {
+  @apply cursor-pointer rounded-full border border-borde bg-transparent px-[11px] py-1 text-[12px] font-[550] text-tenue transition-all
+         hover:border-[rgba(var(--rgb-tinta),.45)] hover:text-texto movil:px-3 movil:py-1.5 movil:whitespace-nowrap;
+}
+.chip.activo { @apply border-[rgba(var(--rgb-acento),.6)] bg-acento-suave text-acento-texto; }
+.chip:disabled { @apply cursor-default opacity-35; }
+.chip:disabled:hover { @apply border-borde text-tenue; }
+
+/* Ver todo, Completo y Replay: en el celular, solo el icono. */
+.segmento.vista button { @apply inline-flex items-center gap-[5px] movil:min-w-[34px] movil:text-[0px]; }
+.segmento.vista button .icon { @apply movil:size-[15px]; }
+.segmento.vista button.presentacion-on { @apply text-aviso; }
+
+/* ------------------------------------------------------- precio y squeeze */
+.panel-precio { @apply relative min-h-[220px] flex-[3_1_0] bg-fondo movil:min-h-60; }
+/* El grafico (un solo grafico con dos paneles) sale de la caja del precio y cubre
+   esta: la caja solo da el alto y la leyenda, y deja pasar el mouse al grafico. */
+.panel-osc {
+  @apply pointer-events-none relative max-h-60 min-h-[110px] flex-[1_1_0] border-t border-borde
+         movil:max-h-[150px] movil:min-h-24;
+}
+@media (max-height: 500px) {
+  .panel-precio { @apply min-h-40; }
+  .panel-osc { @apply max-h-[90px] min-h-[70px]; }
+}
+/* En la grilla de varios graficos cada celda es chica: alturas minimas menores. */
+.celda .panel-precio { @apply min-h-[120px]; }
+.celda .panel-osc { @apply max-h-[160px] min-h-16; }
+.celda .panel-osc .ayuda-oscilador { @apply hidden; }
+/* ADX + SQZ apagado: las velas toman su lugar. */
+.panel-osc.oculto { @apply hidden; }
+.panel-osc .leyenda { @apply pointer-events-auto z-4 -ml-[7px] rounded-md bg-velo px-[7px] py-0.5; }
+.panel-osc .leyenda { @apply movil:gap-3; }
+.panel-osc .leyenda .ayuda-oscilador { @apply movil:hidden; }
+.lienzo { @apply absolute inset-0 z-1; }
+.capa-fondo { @apply pointer-events-none absolute inset-0 z-0; }
+.capa-canvas { @apply pointer-events-none absolute inset-0 z-2; }
+/* Las operaciones (MT5, la que se arma y las simuladas): arriba de los dibujos. */
+.capa-posiciones { @apply pointer-events-none absolute inset-0 z-2; }
+.capa-cuenta { @apply pointer-events-none absolute inset-0 z-2; }
+
+/* ----------------------------------------------------------------- leyendas */
+.leyenda {
+  @apply pointer-events-none absolute top-[9px] left-3 z-3 flex flex-wrap items-center gap-3 text-[11.5px] tabular-nums
+         [text-shadow:0_0_8px_var(--fondo)] movil:gap-2 movil:text-[10.5px];
+}
+.leyendas {
+  @apply pointer-events-none absolute top-[9px] right-24 left-3 z-3 flex flex-col gap-[5px]
+         movil:top-1.5 movil:right-16 movil:left-2;
+}
+.leyendas .leyenda { @apply static -ml-[7px] self-start rounded-md bg-velo px-[7px] py-0.5; }
+.leyenda b { @apply font-[650]; }
+.leyenda-medias { @apply flex gap-2.5 text-tenue max-[1100px]:hidden; }
+.leyenda-medias, .leyenda-broker { @apply movil:hidden; }
+.leyenda i, .leyenda .punto { @apply mr-[5px] inline-block size-2 rounded-xs align-[0]; }
+.leyenda .punto { @apply rounded-full; }
+.leyenda-broker b { @apply font-mono font-medium text-texto; }
+.leyenda .ohlc { @apply font-mono text-[11px]; }
+.leyenda .ohlc i { @apply mr-[3px] ml-1.5 text-apagado not-italic; }
+.leyenda .ohlc i:first-child { @apply ml-0; }
+
+/* ------------------------------------------------------------------ avisos */
+.aviso-grafico {
+  @apply absolute top-[45%] left-1/2 z-4 -translate-1/2 rounded-lg border border-borde bg-panel-2 px-4 py-2.5 text-[12.5px] text-tenue;
+}
+.cargando-viejas {
+  @apply pointer-events-none absolute bottom-3.5 left-14 z-4 rounded-full bg-oscuro px-2.5 py-1 text-[11.5px] text-sobre-oscuro shadow-desk;
+}
+.volver {
+  @apply absolute right-[92px] bottom-3.5 z-4 cursor-pointer rounded-lg border border-borde bg-panel-2 px-3 py-1.5 text-[12px] text-texto shadow-desk
+         hover:bg-panel-3;
+}

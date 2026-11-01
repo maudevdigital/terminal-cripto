@@ -1,0 +1,15 @@
+/* Las lineas de SL, TP y precio de lo abierto (toman el puntero solo cerca de una
+   linea) y la confirmacion de lo que se arrastro. */
+.capa-lineas { @apply pointer-events-none absolute inset-0 z-3; }
+.capa-lineas.arrastrable { @apply pointer-events-auto cursor-ns-resize movil:touch-none; }
+.cambio-orden {
+  @apply absolute right-[92px] z-6 flex w-[300px] flex-col gap-1 rounded-[9px] border border-borde bg-panel-2 px-3 py-2.5 text-[12px] text-texto shadow-desk
+         movil:right-2 movil:left-2 movil:w-auto;
+}
+.cambio-orden.sl { @apply border-[rgba(var(--rgb-baja),.6)]; }
+.cambio-orden.tp { @apply border-[rgba(var(--rgb-sube),.6)]; }
+.cambio-orden .cambio-precios { @apply font-mono text-tenue; }
+.cambio-orden .cambio-precios b { @apply font-semibold text-texto; }
+.cambio-orden .op-acciones button { @apply cursor-pointer rounded-md border border-borde bg-panel-3 px-2.5 py-1.5 text-[12px] text-texto; }
+.cambio-orden .op-acciones .boton-orden.confirmar { @apply border-oscuro bg-oscuro text-sobre-oscuro; }
+.cambio-orden .op-acciones .boton-orden:disabled { @apply cursor-default opacity-40; }

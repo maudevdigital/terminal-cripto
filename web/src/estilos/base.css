@@ -1,0 +1,61 @@
+/* La paleta (tokens) y lo de toda la pagina. */
+:root {
+  /* Paleta desk: grises neutros (no azulados), bordes blancos
+     transparentes, texto casi blanco, sin color de acento (el activo es blanco) y el
+     color solo en el precio, el PnL y lo que pide atencion. Los "fuerte" son para
+     rellenos; los otros, para texto. Los --rgb-* son para transparencias:
+     rgba(var(--rgb-sube), .2). Los colores del grafico: web/src/lib/constants.js (C).
+     En Tailwind son colores del tema (tailwind.css): bg-panel, text-tenue... */
+  --fondo: #121316;
+  --panel: #151619;
+  --panel-2: #1C1D20;
+  --panel-3: #26272B;
+  --borde: rgba(255,255,255,.1);
+  --linea: rgba(255,255,255,.06);
+  --texto: #FAFAFA;
+  --tenue: #A1A1A1;
+  --apagado: #909095;
+  --acento: #E5E5E5;
+  --acento-texto: #FAFAFA;
+  --acento-suave: rgba(255,255,255,.08);
+  --oscuro: #E5E5E5;
+  --sobre-oscuro: #171717;
+  --sube: #22AB94;
+  --baja: #F23645;
+  --aviso: #E0A84A;
+  --sube-fuerte: #1E9C86;
+  --baja-fuerte: #E0313F;
+  --aviso-fuerte: #D4952B;
+  --velo: rgba(18,19,22,.86);
+  --vidrio: rgba(21,22,25,.97);
+  --sombra: 0 12px 32px rgba(0,0,0,.55);
+  --hover: rgba(255,255,255,.06);
+  --rgb-tinta: 250,250,250;
+  --rgb-sombra: 0,0,0;
+  --rgb-acento: 229,229,229;
+  --rgb-sube: 34,171,148;
+  --rgb-baja: 242,54,69;
+  --rgb-aviso: 224,168,74;
+  --radio: 7px;
+  --sans: Geist, Inter, "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono: "JetBrains Mono", "Cascadia Mono", ui-monospace, monospace;
+}
+
+* { @apply box-border; scrollbar-width: thin; scrollbar-color: rgba(var(--rgb-tinta),.32) transparent; }
+::selection { @apply bg-[rgba(var(--rgb-acento),.28)]; }
+:focus-visible { @apply outline-2 outline-offset-1 outline-acento; }
+html, body, #root { @apply m-0 h-full movil:h-dvh; }
+body { @apply overflow-hidden bg-fondo font-sans text-[13px]/[1.45] text-texto antialiased movil:text-[13.5px]; }
+button { font: inherit; color: inherit; transition: background-color .15s, color .15s, border-color .15s, box-shadow .15s; }
+.tenue { @apply text-tenue; }
+.pos { @apply text-sube; }
+.neg { @apply text-baja; }
+.icon { @apply inline-block flex-none align-[-2px]; }
+.cargando { @apply grid h-full place-items-center text-tenue; }
+
+.app { @apply flex h-full flex-col movil:pt-[env(safe-area-inset-top)]; }
+@media (max-height: 500px) {
+  .app { @apply pr-[env(safe-area-inset-right)] pl-[env(safe-area-inset-left)]; }
+}
+
+.segmento button:disabled { @apply cursor-default opacity-35; }

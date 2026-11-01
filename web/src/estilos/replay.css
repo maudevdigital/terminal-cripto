@@ -1,0 +1,43 @@
+/* El replay (la barra de arriba) y el backtest del panel. */
+.barra-replay {
+  @apply flex flex-wrap items-center gap-2 border-b border-borde bg-[rgba(var(--rgb-acento),.10)] px-3 py-1.5 text-[12px];
+}
+.barra-replay .replay-marca { @apply inline-flex items-center gap-[5px] font-[650] text-acento-texto; }
+.barra-replay button, .barra-replay select, .barra-replay input {
+  @apply inline-flex cursor-pointer items-center gap-[5px] rounded-md border border-borde bg-panel-2 px-[9px] py-1 text-[12px] text-texto;
+  font-family: inherit;
+}
+.barra-replay input { @apply cursor-text [color-scheme:light]; }
+.barra-replay button:disabled { @apply cursor-default opacity-40; }
+.barra-replay button.activo { @apply border-acento text-acento-texto; }
+.barra-replay .replay-play { @apply border-oscuro bg-oscuro text-sobre-oscuro; }
+.barra-replay .replay-hora { @apply font-mono tabular-nums; }
+.barra-replay .replay-ir { @apply ml-auto inline-flex items-center gap-1.5 max-[820px]:ml-0; }
+.barra-replay .replay-salir { @apply text-tenue; }
+
+.backtest input, .backtest select {
+  @apply min-w-0 rounded-md border border-borde bg-panel-2 px-2 py-[5px] text-[12.5px] text-texto [color-scheme:light] max-[820px]:text-[16px];
+  font-family: inherit;
+}
+.backtest input:focus, .backtest select:focus { @apply border-acento shadow-[0_0_0_2px_var(--acento-suave)] outline-none; }
+.backtest label { @apply flex flex-col gap-[3px] text-[11.5px] text-tenue; }
+.bt-ajustes { @apply flex-wrap justify-start!; }
+.bt-ajustes label { @apply flex-[1_1_80px]; }
+.bt-orden { @apply gap-2; }
+.bt-orden .segmento { @apply self-start; }
+.bt-orden .segmento button.compra { @apply bg-sube-fuerte text-white; }
+.bt-orden .segmento button.venta { @apply bg-baja-fuerte text-white; }
+.bt-op { @apply flex flex-col gap-[3px] border-b border-linea py-1.5; }
+.bt-resumen { @apply grid grid-cols-4 gap-x-2.5 gap-y-2 max-[820px]:grid-cols-2; }
+.bt-resumen span { @apply flex flex-col; }
+.bt-resumen small { @apply tracking-normal normal-case; }
+.bt-resumen b { @apply font-mono font-medium tabular-nums; }
+.bt-tabla { @apply w-full border-collapse text-[11.5px] tabular-nums; }
+.bt-tabla th { @apply border-b border-borde px-1 py-0.5 text-left font-medium text-tenue; }
+.bt-tabla td { @apply border-b border-linea p-1 whitespace-nowrap; }
+.bt-tabla tr.clic { @apply cursor-pointer; }
+.bt-tabla tr.clic:hover td { @apply bg-panel-2; }
+.bt-tabla .chico-x { @apply cursor-pointer border-0 bg-none px-1 py-0 text-tenue; }
+
+/* Binance en Operar: solo para mirar, con el boton al grafico a la derecha. */
+.dato.binance .op-posicion .chip { @apply mt-[3px] self-start px-2 py-0.5 text-[11px]; }

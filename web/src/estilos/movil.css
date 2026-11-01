@@ -1,0 +1,37 @@
+/* El celular: una columna, arriba los mercados, en el medio el grafico o el panel
+   (Operar) a pantalla completa y abajo la barra de secciones. Lo de cada componente
+   esta en su archivo (con movil:); aca, lo de la pagina entera. */
+
+/* Una cosa por vez. */
+.app.movil.ver-grafico .lateral { @apply movil:hidden; }
+.app.movil.ver-panel .grafico { @apply movil:hidden; }
+
+/* Grafico completo: en la compu, sin la cabecera (ni el rail ni el panel); en el
+   celular, solo las velas y el panel de abajo, sin barras. Girando el iPhone queda
+   apaisado. */
+/* hidden! (con prioridad): la cabecera trae flex en su JSX, y una utilidad le gana a esta capa. */
+.app.completo .header { @apply hidden!; }
+.app.movil.completo .header, .app.movil.completo .grafico-barra { @apply movil:hidden!; }
+.app.movil.completo { @apply movil:pt-[env(safe-area-inset-top)] movil:pb-[env(safe-area-inset-bottom)]; }
+.app.movil.completo .panel-osc { @apply movil:max-h-[120px]; }
+.app.movil.completo .leyendas { @apply movil:right-[140px]; }
+@media (max-height: 500px) {
+  .app.movil.completo .panel-osc { @apply max-h-20; }
+}
+.salir-completo {
+  @apply hidden movil:absolute movil:top-1.5 movil:right-[70px] movil:z-6 movil:inline-flex movil:cursor-pointer movil:items-center movil:gap-[5px]
+         movil:rounded-lg movil:border movil:border-borde movil:bg-vidrio movil:px-[11px] movil:py-1.5 movil:text-[12.5px] movil:font-semibold movil:text-texto;
+}
+
+/* La barra de secciones, abajo y por encima de la barra del iPhone. */
+.nav-movil {
+  @apply hidden movil:flex movil:flex-none movil:justify-around movil:border-t movil:border-borde movil:bg-panel movil:px-1 movil:pt-1
+         movil:pb-[calc(4px+env(safe-area-inset-bottom))];
+}
+.nav-movil button {
+  @apply flex flex-1 cursor-pointer flex-col items-center gap-0.5 border-0 bg-transparent py-1.5 text-[10.5px] font-semibold text-tenue;
+}
+.nav-movil button.activo { @apply text-acento-texto; }
+@media (max-height: 500px) {
+  .nav-movil button { @apply flex-row justify-center gap-1.5 py-1; }
+}

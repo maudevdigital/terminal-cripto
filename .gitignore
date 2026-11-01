@@ -1,0 +1,21 @@
+.env
+# Claves de Google (la cuenta de servicio del historial): nunca al repo.
+*service-account*.json
+google*.json
+credenciales*.json
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+datos/
+mt5/*.ex5
+mt5/*.mq5.bak-*
+node_modules/
+web/dist/
+# Los .wav de NinjaTrader (son suyos: se copian a mano, no van al repo).
+sonidos/*
+!sonidos/LEEME.md
+
+# Capturas y perfil temporal de la revisión visual local.
+.revision/
+.revision-tests.log
